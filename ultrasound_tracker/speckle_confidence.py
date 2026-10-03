@@ -1,10 +1,11 @@
-"""Ultrasound-specific confidence metrics for adaptive Kalman measurement noise.
+"""Ultrasound-specific heuristic scores for adaptive Kalman measurement noise.
 
-The functions in this module are deliberately interpretable.  They estimate
-how trustworthy the current image-derived measurement is using speckle
-coherence, local motion consistency, feature-detector support, and anatomical
-geometry stability.  Low confidence does not mean a frame is unusable; it means
-the Kalman filter should trust the measurement less by increasing ``R_t``.
+The functions in this module combine speckle coherence, local motion
+consistency, feature-detector support, and anatomical geometry stability into
+interpretable image/geometry scores.  Lower scores are mapped by design to
+higher ``R_t`` and lower measurement gain.  Whether those scores are calibrated
+to measurement error is an empirical question that must be tested against an
+outcome which the adaptive weighting did not itself produce.
 """
 
 from __future__ import annotations

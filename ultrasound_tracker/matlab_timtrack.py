@@ -601,12 +601,14 @@ def detect_timtrack_geofeature_from_image(
     apox = np.asarray(filtered["apox_1b"], dtype=np.float64).reshape(-1)
     super_settings = apo_parms.get("super", {}) if isinstance(apo_parms.get("super", {}), Mapping) else {}
     deep_settings = apo_parms.get("deep", {}) if isinstance(apo_parms.get("deep", {}), Mapping) else {}
+    maxangle_constraint_mode = str(apo_parms.get("maxangle_constraint_mode", "symmetric"))
     super_coef = fit_apo_matlab_like(
         apox,
         filtered["super_vec_1b"],
         fit_method=str(super_settings.get("fit_method", "enforce_maxangle")),
         maxangle=float(super_settings.get("maxangle", 0.5)),
         order=int(super_settings.get("order", 1)),
+        constraint_mode=maxangle_constraint_mode,
     )
     deep_coef = fit_apo_matlab_like(
         apox,
@@ -614,6 +616,7 @@ def detect_timtrack_geofeature_from_image(
         fit_method=str(deep_settings.get("fit_method", "enforce_maxangle")),
         maxangle=float(deep_settings.get("maxangle", 0.5)),
         order=int(deep_settings.get("order", 1)),
+        constraint_mode=maxangle_constraint_mode,
     )
     super_coef_lin = fit_apo_matlab_like(
         apox,
@@ -621,6 +624,7 @@ def detect_timtrack_geofeature_from_image(
         fit_method=str(super_settings.get("fit_method", "enforce_maxangle")),
         maxangle=float(super_settings.get("maxangle", 0.5)),
         order=1,
+        constraint_mode=maxangle_constraint_mode,
     )
     deep_coef_lin = fit_apo_matlab_like(
         apox,
@@ -628,6 +632,7 @@ def detect_timtrack_geofeature_from_image(
         fit_method=str(deep_settings.get("fit_method", "enforce_maxangle")),
         maxangle=float(deep_settings.get("maxangle", 0.5)),
         order=1,
+        constraint_mode=maxangle_constraint_mode,
     )
 
     betha = -float(_atan2d(super_coef_lin[0], 1.0)) if super_coef_lin is not None else np.nan

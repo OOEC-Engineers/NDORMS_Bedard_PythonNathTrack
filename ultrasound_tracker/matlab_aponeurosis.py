@@ -44,6 +44,7 @@ class MatlabHoughAponeurosisConfig:
     hough_theta_step_deg: float = 1.0
     horizontal_replacement_angle_deg: float = 5.0
     fit_method: str = "enforce_maxangle"
+    maxangle_constraint_mode: str = "symmetric"
     super_maxangle: float = 0.5
     deep_maxangle: float = 0.5
     super_order: int = 1
@@ -385,8 +386,15 @@ def fit_apo_matlab_like(
     fit_method: str = "enforce_maxangle",
     maxangle: float = 0.5,
     order: int = 1,
+    constraint_mode: str = "symmetric",
 ) -> Optional[np.ndarray]:
-    """Fit an aponeurosis vector using the MATLAB TimTrack angle constraint."""
+    """Fit an aponeurosis vector with a selectable max-angle constraint.
+
+    ``symmetric`` preserves NathTrack's validated historical interpretation.
+    ``matlab-one-sided`` reproduces UltraTimTrack ``fit_apo.m`` exactly: the
+    constraint is applied only when ``fit_angle > maxangle``.  A negative
+    ``fit_angle`` is therefore not clipped, regardless of its magnitude.
+    """
 
     x = np.asarray(apox_1b, dtype=np.float64).reshape(-1)
     y = np.asarray(apoy_1b, dtype=np.float64).reshape(-1)
@@ -401,8 +409,20 @@ def fit_apo_matlab_like(
         slope, intercept = coef
         fit_angle = -float(_atan2d(slope, 1.0))
         angle_limit = abs(float(maxangle))
-        if np.isfinite(angle_limit) and abs(fit_angle) > angle_limit:
-            clipped_angle = float(np.clip(fit_angle, -angle_limit, angle_limit))
+        mode = str(constraint_mode).lower()
+        if mode not in {"symmetric", "matlab-one-sided"}:
+            raise ValueError("constraint_mode must be 'symmetric' or 'matlab-one-sided'.")
+        should_constrain = (
+            abs(fit_angle) > angle_limit
+            if mode == "symmetric"
+            else fit_angle > float(maxangle)
+        )
+        if np.isfinite(angle_limit) and should_constrain:
+            clipped_angle = (
+                float(np.clip(fit_angle, -angle_limit, angle_limit))
+                if mode == "symmetric"
+                else float(maxangle)
+            )
             slope = -float(np.tan(np.deg2rad(clipped_angle)))
             intercept = float(np.mean(y[valid] - slope * x[valid]))
             coef = np.array([slope, intercept], dtype=np.float64)
@@ -469,6 +489,9 @@ def detect_matlab_hough_aponeuroses(
         deep_maxangle = float(_get_nested(apo_parms, ("deep", "maxangle"), cfg.deep_maxangle))
         super_order = int(_get_nested(apo_parms, ("super", "order"), cfg.super_order))
         deep_order = int(_get_nested(apo_parms, ("deep", "order"), cfg.deep_order))
+        maxangle_constraint_mode = str(
+            apo_parms.get("maxangle_constraint_mode", cfg.maxangle_constraint_mode)
+        )
     else:
         apox = (
             np.asarray(cfg.apox_1b, dtype=np.float64).reshape(-1)
@@ -484,6 +507,7 @@ def detect_matlab_hough_aponeuroses(
         deep_maxangle = cfg.deep_maxangle
         super_order = cfg.super_order
         deep_order = cfg.deep_order
+        maxangle_constraint_mode = cfg.maxangle_constraint_mode
 
     apo_thres = adaptive_threshold_matlab_style(
         img,
@@ -516,6 +540,7 @@ def detect_matlab_hough_aponeuroses(
         fit_method=str(super_fit),
         maxangle=super_maxangle,
         order=super_order,
+        constraint_mode=maxangle_constraint_mode,
     )
     deep_coef = fit_apo_matlab_like(
         apox,
@@ -523,6 +548,7 @@ def detect_matlab_hough_aponeuroses(
         fit_method=str(deep_fit),
         maxangle=deep_maxangle,
         order=deep_order,
+        constraint_mode=maxangle_constraint_mode,
     )
     super_coef_lin = fit_apo_matlab_like(
         apox,
@@ -530,6 +556,7 @@ def detect_matlab_hough_aponeuroses(
         fit_method=str(super_fit),
         maxangle=super_maxangle,
         order=1,
+        constraint_mode=maxangle_constraint_mode,
     )
     deep_coef_lin = fit_apo_matlab_like(
         apox,
@@ -537,6 +564,7 @@ def detect_matlab_hough_aponeuroses(
         fit_method=str(deep_fit),
         maxangle=deep_maxangle,
         order=1,
+        constraint_mode=maxangle_constraint_mode,
     )
 
     super_line = line_segment_from_polyfit_1b(super_coef_lin, n_cols)
@@ -546,6 +574,7 @@ def detect_matlab_hough_aponeuroses(
 
     return {
         "method": "matlab_hough",
+        "maxangle_constraint_mode": maxangle_constraint_mode,
         "image_shape": (n_rows, n_cols),
         "apox_1b": apox,
         "apo_thres": apo_thres,

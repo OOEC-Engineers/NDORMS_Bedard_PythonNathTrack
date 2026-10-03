@@ -10,7 +10,10 @@ import pandas as pd
 from scipy.ndimage import binary_dilation
 
 from .geometry import line_angles_batch, line_lengths_batch, normalize_angle
-from .matlab_timtrack import fascicle_segment_from_aponeuroses_and_alpha
+from .matlab_timtrack import (
+    fascicle_segment_from_aponeuroses_and_alpha,
+    fascicle_segment_from_geofeature,
+)
 
 
 @dataclass(frozen=True)
@@ -200,6 +203,15 @@ def extract_fascicle_seed_candidates(
             : cfg.top_peak_limit
         ]
         alpha_pool = np.unique(np.round(np.r_[angle_grid, peak_alphas[np.isfinite(peak_alphas)]], 3))
+        # ``angle_grid`` already honours the configured seed-only range, but
+        # raw Hough peaks are appended so they can compete with grid
+        # candidates.  Apply the same range to the combined pool; otherwise a
+        # Hough peak outside ``--seed-angle-range`` can bypass the advertised
+        # initialization constraint and be selected.
+        alpha_pool = alpha_pool[
+            (alpha_pool >= float(cfg.angle_min_deg) - 1e-9)
+            & (alpha_pool <= float(cfg.angle_max_deg) + 1e-9)
+        ]
         max_peak_weight = float(np.nanmax(peak_weights)) if peak_weights.size and np.isfinite(np.nanmax(peak_weights)) else np.nan
 
         for alpha in alpha_pool:
@@ -399,4 +411,51 @@ def select_autonomous_fascicle_seed(
         "selected_seed_segment": np.asarray(selected_seed, dtype=float),
         "cluster_members": cluster_members,
         "per_frame_best": per_frame_best,
+    }
+
+
+def select_matlab_first_frame_seed(first_entry: Mapping) -> dict:
+    """Use MATLAB's first-frame weighted-median Hough angle and centred line.
+
+    The baseline Hough angle is preferred so the optional Python local-maximum
+    fallback cannot alter this MATLAB-initialization sensitivity mode.
+    """
+
+    baseline = float(np.asarray(first_entry.get("hough_baseline_alpha_deg", np.nan)).reshape(-1)[0])
+    detected = float(np.asarray(first_entry.get("alpha", np.nan)).reshape(-1)[0])
+    selected_alpha = baseline if np.isfinite(baseline) else detected
+    if not np.isfinite(selected_alpha):
+        raise RuntimeError("The first TimTrack frame has no finite weighted-median Hough angle.")
+
+    selected_seed = fascicle_segment_from_geofeature(first_entry, alpha_override=selected_alpha)
+    if not np.all(np.isfinite(selected_seed)):
+        raise RuntimeError("The first TimTrack frame could not produce a finite MATLAB-centred fascicle line.")
+
+    cluster_id = "matlab_first_frame_weighted_median"
+    audit = pd.DataFrame(
+        [
+            {
+                "frame": 0,
+                "candidate_source": cluster_id,
+                "alpha_deg": selected_alpha,
+                "segment_angle_deg": normalized_segment_angle(selected_seed),
+                "x_sup": float(selected_seed[0]),
+                "y_sup": float(selected_seed[1]),
+                "x_deep": float(selected_seed[2]),
+                "y_deep": float(selected_seed[3]),
+                "cluster_id": cluster_id,
+            }
+        ]
+    )
+    return {
+        "selected_cluster": {
+            "cluster_id": cluster_id,
+            "frame_coverage": 1,
+            "median_alpha_deg": selected_alpha,
+            "selection_rule": "first-frame baseline weighted-median Hough angle plus MATLAB-centred intercept",
+        },
+        "selected_alpha_deg": selected_alpha,
+        "selected_seed_segment": np.asarray(selected_seed, dtype=float),
+        "cluster_members": audit.copy(),
+        "per_frame_best": audit,
     }
