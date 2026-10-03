@@ -1,0 +1,30 @@
+{
+  "workbook": "/Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/NathTrack_MATLAB_Python_Final_Comparison.xlsx",
+  "sheets": [
+    "README",
+    "Run_Metadata",
+    "Framewise_Data",
+    "Summary_Metrics",
+    "Fixed_vs_Adaptive",
+    "Bland_Altman",
+    "Regression",
+    "Alignment_Check",
+    "Confidence_Analysis",
+    "Outlier_Frames",
+    "Figure_Data",
+    "Data_Dictionary",
+    "Manuscript_Summary",
+    "Plots"
+  ],
+  "source_rows": {
+    "Framewise_Data": 2667,
+    "Summary_Metrics": 6,
+    "Fixed_vs_Adaptive": 3,
+    "Bland_Altman": 15996,
+    "Regression": 15996,
+    "Confidence_Analysis": 15,
+    "Outlier_Frames": 2552,
+    "Figure_Data": 15996,
+    "Data_Dictionary": 105
+  }
+}

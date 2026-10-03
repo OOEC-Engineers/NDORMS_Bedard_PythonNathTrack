@@ -1,0 +1,18 @@
+{
+  "Methods_suggested": "MATLAB UltraTimTrack outputs were compared with two Python NathTrack Kalman variants generated from the same video and ROI: a fixed measurement-covariance (fixed-R) filter and an adaptive anisotropic filter that scales angle and length-side measurement covariances separately. Python initialization used 11 early frames and a seed-only anatomical angle range of 18\u201324 degrees, selecting the stable 18.8-degree branch; the per-frame Hough search remained 5\u201360 degrees. The seed range was selected from the visible fascicle and independent Hough evidence rather than MATLAB agreement. MATLAB sample 1 and Python frame 0 were matched as the same physical video frame; the MATLAB time vector is one-based and begins at 1/fps. Agreement was evaluated without signal smoothing or interpolation using bias, absolute error, RMSE, correlations, ordinary least-squares regression, and Bland\u2013Altman limits of agreement.",
+  "Results_suggested": "ANG: fixed-R RMSE 0.8218 deg and MAE 0.7513 deg; adaptive anisotropic-R RMSE 1.0275 deg and MAE 0.9546 deg (+25.03% RMSE change; +27.07% MAE change relative to fixed-R). PEN: fixed-R RMSE 0.9340 deg and MAE 0.7562 deg; adaptive anisotropic-R RMSE 0.8418 deg and MAE 0.6887 deg (-9.88% RMSE change; -8.92% MAE change relative to fixed-R). FL: fixed-R RMSE 1.5230 mm and MAE 1.2626 mm; adaptive anisotropic-R RMSE 1.4216 mm and MAE 1.2378 mm (-6.66% RMSE change; -1.97% MAE change relative to fixed-R).",
+  "Observations": [
+    "ANG: fixed-R RMSE 0.8218 deg and MAE 0.7513 deg; adaptive anisotropic-R RMSE 1.0275 deg and MAE 0.9546 deg (+25.03% RMSE change; +27.07% MAE change relative to fixed-R).",
+    "PEN: fixed-R RMSE 0.9340 deg and MAE 0.7562 deg; adaptive anisotropic-R RMSE 0.8418 deg and MAE 0.6887 deg (-9.88% RMSE change; -8.92% MAE change relative to fixed-R).",
+    "FL: fixed-R RMSE 1.5230 mm and MAE 1.2626 mm; adaptive anisotropic-R RMSE 1.4216 mm and MAE 1.2378 mm (-6.66% RMSE change; -1.97% MAE change relative to fixed-R)."
+  ],
+  "Interpretation": "These results describe agreement within one technical sequence and can indicate where adaptive-R changed tracking error; they do not establish population-level performance or equivalence.",
+  "Caveats": [
+    "Only one video sequence was analysed.",
+    "Frames are temporally autocorrelated and are not independent biological observations.",
+    "MATLAB is treated as the comparison reference, not an error-free ground truth.",
+    "No prospective equivalence margins were defined, so equivalence was not tested or claimed.",
+    "The promoted Hough local-maximum fallback is part of the current Python pipeline and is reported framewise.",
+    "The Python seed-only 18\u201324 degree range is a documented, sequence-specific anatomical initialization constraint and should be prospectively defined or independently selected in future datasets."
+  ]
+}

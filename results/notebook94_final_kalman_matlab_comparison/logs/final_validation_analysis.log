@@ -1,0 +1,9 @@
+{
+  "framewise_rows": 2667,
+  "included_frames": 2666,
+  "summary_rows": 6,
+  "alignment_rows": 42,
+  "outlier_rows": 2552,
+  "plots": 20,
+  "output_dir": "/Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison"
+}

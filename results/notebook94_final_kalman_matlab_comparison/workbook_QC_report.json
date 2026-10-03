@@ -1,0 +1,620 @@
+{
+  "xlsx_zip_integrity": true,
+  "sheet_names": [
+    "README",
+    "Run_Metadata",
+    "Framewise_Data",
+    "Summary_Metrics",
+    "Fixed_vs_Adaptive",
+    "Bland_Altman",
+    "Regression",
+    "Alignment_Check",
+    "Confidence_Analysis",
+    "Outlier_Frames",
+    "Figure_Data",
+    "Data_Dictionary",
+    "Manuscript_Summary",
+    "Plots"
+  ],
+  "hidden_sheets": [],
+  "embedded_plot_images": 10,
+  "source_row_counts": {
+    "Framewise_Data": 2667,
+    "Summary_Metrics": 6,
+    "Fixed_vs_Adaptive": 3,
+    "Bland_Altman": 15996,
+    "Regression": 15996,
+    "Confidence_Analysis": 15,
+    "Outlier_Frames": 2552,
+    "Figure_Data": 15996,
+    "Data_Dictionary": 105
+  },
+  "formula_count": 125168,
+  "formula_reference_errors": [],
+  "cached_formula_errors": [],
+  "literal_nan_cells": 0,
+  "csv_spotchecks": [
+    {
+      "source_row": 0,
+      "column": "frame_index_video",
+      "excel": 0,
+      "csv": "0",
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "MATLAB_ANG_deg",
+      "excel": 18.5204886372034,
+      "csv": 18.520488637203375,
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "Python_fixed_ANG_deg",
+      "excel": 18.8000000181799,
+      "csv": 18.8000000181799,
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "Python_adaptive_ANG_deg",
+      "excel": 18.8000000181799,
+      "csv": 18.8000000181799,
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "MATLAB_PEN_deg",
+      "excel": 20.3874541543373,
+      "csv": 20.387454154337288,
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "MATLAB_FL_mm",
+      "excel": 72.3070504473412,
+      "csv": 72.30705044734124,
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "adaptive_confidence_score",
+      "excel": 0.971788143142048,
+      "csv": 0.9717881431420484,
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "adaptive_R_scale_angle",
+      "excel": 0.651763380161122,
+      "csv": 0.6517633801611221,
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "hough_localmax_fallback_flag",
+      "excel": false,
+      "csv": "False",
+      "match": true
+    },
+    {
+      "source_row": 0,
+      "column": "included_in_analysis",
+      "excel": true,
+      "csv": "True",
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "frame_index_video",
+      "excel": 1333,
+      "csv": "1333",
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "MATLAB_ANG_deg",
+      "excel": 20.2192320606048,
+      "csv": 20.21923206060481,
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "Python_fixed_ANG_deg",
+      "excel": 20.8617128482366,
+      "csv": 20.861712848236607,
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "Python_adaptive_ANG_deg",
+      "excel": 20.9575518213557,
+      "csv": 20.957551821355736,
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "MATLAB_PEN_deg",
+      "excel": 22.1268682858102,
+      "csv": 22.12686828581018,
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "MATLAB_FL_mm",
+      "excel": 67.2016926987543,
+      "csv": 67.20169269875426,
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "adaptive_confidence_score",
+      "excel": 0.971470885395271,
+      "csv": 0.9714708853952708,
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "adaptive_R_scale_angle",
+      "excel": 0.654188119868795,
+      "csv": 0.6541881198687947,
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "hough_localmax_fallback_flag",
+      "excel": false,
+      "csv": "False",
+      "match": true
+    },
+    {
+      "source_row": 1333,
+      "column": "included_in_analysis",
+      "excel": true,
+      "csv": "True",
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "frame_index_video",
+      "excel": 2665,
+      "csv": "2665",
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "MATLAB_ANG_deg",
+      "excel": 20.560988953165,
+      "csv": 20.56098895316497,
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "Python_fixed_ANG_deg",
+      "excel": 20.8899612040146,
+      "csv": 20.88996120401464,
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "Python_adaptive_ANG_deg",
+      "excel": 21.0155312724344,
+      "csv": 21.01553127243443,
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "MATLAB_PEN_deg",
+      "excel": 22.5344181952804,
+      "csv": 22.53441819528038,
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "MATLAB_FL_mm",
+      "excel": 65.8273469154017,
+      "csv": 65.82734691540169,
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "adaptive_confidence_score",
+      "excel": 0.971903410972789,
+      "csv": 0.9719034109727888,
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "adaptive_R_scale_angle",
+      "excel": 0.650590813715321,
+      "csv": 0.6505908137153208,
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "hough_localmax_fallback_flag",
+      "excel": false,
+      "csv": "False",
+      "match": true
+    },
+    {
+      "source_row": 2665,
+      "column": "included_in_analysis",
+      "excel": true,
+      "csv": "True",
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "frame_index_video",
+      "excel": 2666,
+      "csv": "2666",
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "MATLAB_ANG_deg",
+      "excel": null,
+      "csv": null,
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "Python_fixed_ANG_deg",
+      "excel": 20.8890388401141,
+      "csv": 20.88903884011407,
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "Python_adaptive_ANG_deg",
+      "excel": 21.0146166041027,
+      "csv": 21.014616604102713,
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "MATLAB_PEN_deg",
+      "excel": null,
+      "csv": null,
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "MATLAB_FL_mm",
+      "excel": null,
+      "csv": null,
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "adaptive_confidence_score",
+      "excel": 0.968094118459714,
+      "csv": 0.9680941184597138,
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "adaptive_R_scale_angle",
+      "excel": 0.726253342680828,
+      "csv": 0.7262533426808275,
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "hough_localmax_fallback_flag",
+      "excel": false,
+      "csv": "False",
+      "match": true
+    },
+    {
+      "source_row": 2666,
+      "column": "included_in_analysis",
+      "excel": false,
+      "csv": "False",
+      "match": true
+    }
+  ],
+  "mat_file_spotchecks": [
+    {
+      "matlab_sample": 0,
+      "column": "MATLAB_ANG_deg",
+      "excel": 18.5204886372034,
+      "mat_file_value": 18.520488637203375,
+      "match": true
+    },
+    {
+      "matlab_sample": 0,
+      "column": "MATLAB_PEN_deg",
+      "excel": 20.3874541543373,
+      "mat_file_value": 20.387454154337288,
+      "match": true
+    },
+    {
+      "matlab_sample": 0,
+      "column": "MATLAB_FL_mm",
+      "excel": 72.3070504473412,
+      "mat_file_value": 72.30705044734124,
+      "match": true
+    },
+    {
+      "matlab_sample": 1333,
+      "column": "MATLAB_ANG_deg",
+      "excel": 20.2192320606048,
+      "mat_file_value": 20.21923206060481,
+      "match": true
+    },
+    {
+      "matlab_sample": 1333,
+      "column": "MATLAB_PEN_deg",
+      "excel": 22.1268682858102,
+      "mat_file_value": 22.12686828581018,
+      "match": true
+    },
+    {
+      "matlab_sample": 1333,
+      "column": "MATLAB_FL_mm",
+      "excel": 67.2016926987543,
+      "mat_file_value": 67.20169269875426,
+      "match": true
+    },
+    {
+      "matlab_sample": 2665,
+      "column": "MATLAB_ANG_deg",
+      "excel": 20.560988953165,
+      "mat_file_value": 20.56098895316497,
+      "match": true
+    },
+    {
+      "matlab_sample": 2665,
+      "column": "MATLAB_PEN_deg",
+      "excel": 22.5344181952804,
+      "mat_file_value": 22.53441819528038,
+      "match": true
+    },
+    {
+      "matlab_sample": 2665,
+      "column": "MATLAB_FL_mm",
+      "excel": 65.8273469154017,
+      "mat_file_value": 65.82734691540169,
+      "match": true
+    }
+  ],
+  "formula_cache_spotchecks": [
+    {
+      "cell": "AA2",
+      "formula": "=IF(OR(J2=\"\",I2=\"\"),\"\",J2-I2)",
+      "cached_value": 0.27951138097653,
+      "valid": true
+    },
+    {
+      "cell": "AB2",
+      "formula": "=IF(OR(K2=\"\",I2=\"\"),\"\",K2-I2)",
+      "cached_value": 0.27951138097653,
+      "valid": true
+    },
+    {
+      "cell": "AC2",
+      "formula": "=IF(OR(M2=\"\",L2=\"\"),\"\",M2-L2)",
+      "cached_value": -1.58745413615739,
+      "valid": true
+    },
+    {
+      "cell": "AD2",
+      "formula": "=IF(OR(N2=\"\",L2=\"\"),\"\",N2-L2)",
+      "cached_value": -1.58745413615739,
+      "valid": true
+    },
+    {
+      "cell": "AE2",
+      "formula": "=IF(OR(Y2=\"\",X2=\"\"),\"\",Y2-X2)",
+      "cached_value": 3.72975217913249,
+      "valid": true
+    },
+    {
+      "cell": "AF2",
+      "formula": "=IF(OR(Z2=\"\",X2=\"\"),\"\",Z2-X2)",
+      "cached_value": 3.72975217913249,
+      "valid": true
+    },
+    {
+      "cell": "AG2",
+      "formula": "=IF(AA2=\"\",\"\",ABS(AA2))",
+      "cached_value": 0.27951138097653,
+      "valid": true
+    },
+    {
+      "cell": "AH2",
+      "formula": "=IF(AB2=\"\",\"\",ABS(AB2))",
+      "cached_value": 0.27951138097653,
+      "valid": true
+    },
+    {
+      "cell": "AI2",
+      "formula": "=IF(AC2=\"\",\"\",ABS(AC2))",
+      "cached_value": 1.58745413615739,
+      "valid": true
+    },
+    {
+      "cell": "AJ2",
+      "formula": "=IF(AD2=\"\",\"\",ABS(AD2))",
+      "cached_value": 1.58745413615739,
+      "valid": true
+    },
+    {
+      "cell": "AK2",
+      "formula": "=IF(AE2=\"\",\"\",ABS(AE2))",
+      "cached_value": 3.72975217913249,
+      "valid": true
+    },
+    {
+      "cell": "AL2",
+      "formula": "=IF(AF2=\"\",\"\",ABS(AF2))",
+      "cached_value": 3.72975217913249,
+      "valid": true
+    },
+    {
+      "cell": "AA1335",
+      "formula": "=IF(OR(J1335=\"\",I1335=\"\"),\"\",J1335-I1335)",
+      "cached_value": 0.642480787631801,
+      "valid": true
+    },
+    {
+      "cell": "AB1335",
+      "formula": "=IF(OR(K1335=\"\",I1335=\"\"),\"\",K1335-I1335)",
+      "cached_value": 0.73831976075093,
+      "valid": true
+    },
+    {
+      "cell": "AC1335",
+      "formula": "=IF(OR(M1335=\"\",L1335=\"\"),\"\",M1335-L1335)",
+      "cached_value": -1.20881727567634,
+      "valid": true
+    },
+    {
+      "cell": "AD1335",
+      "formula": "=IF(OR(N1335=\"\",L1335=\"\"),\"\",N1335-L1335)",
+      "cached_value": -1.11297830255721,
+      "valid": true
+    },
+    {
+      "cell": "AE1335",
+      "formula": "=IF(OR(Y1335=\"\",X1335=\"\"),\"\",Y1335-X1335)",
+      "cached_value": 1.62380749462632,
+      "valid": true
+    },
+    {
+      "cell": "AF1335",
+      "formula": "=IF(OR(Z1335=\"\",X1335=\"\"),\"\",Z1335-X1335)",
+      "cached_value": 1.32235516414507,
+      "valid": true
+    },
+    {
+      "cell": "AG1335",
+      "formula": "=IF(AA1335=\"\",\"\",ABS(AA1335))",
+      "cached_value": 0.642480787631801,
+      "valid": true
+    },
+    {
+      "cell": "AH1335",
+      "formula": "=IF(AB1335=\"\",\"\",ABS(AB1335))",
+      "cached_value": 0.73831976075093,
+      "valid": true
+    },
+    {
+      "cell": "AI1335",
+      "formula": "=IF(AC1335=\"\",\"\",ABS(AC1335))",
+      "cached_value": 1.20881727567634,
+      "valid": true
+    },
+    {
+      "cell": "AJ1335",
+      "formula": "=IF(AD1335=\"\",\"\",ABS(AD1335))",
+      "cached_value": 1.11297830255721,
+      "valid": true
+    },
+    {
+      "cell": "AK1335",
+      "formula": "=IF(AE1335=\"\",\"\",ABS(AE1335))",
+      "cached_value": 1.62380749462632,
+      "valid": true
+    },
+    {
+      "cell": "AL1335",
+      "formula": "=IF(AF1335=\"\",\"\",ABS(AF1335))",
+      "cached_value": 1.32235516414507,
+      "valid": true
+    },
+    {
+      "cell": "AA2667",
+      "formula": "=IF(OR(J2667=\"\",I2667=\"\"),\"\",J2667-I2667)",
+      "cached_value": 0.32897225084967,
+      "valid": true
+    },
+    {
+      "cell": "AB2667",
+      "formula": "=IF(OR(K2667=\"\",I2667=\"\"),\"\",K2667-I2667)",
+      "cached_value": 0.454542319269461,
+      "valid": true
+    },
+    {
+      "cell": "AC2667",
+      "formula": "=IF(OR(M2667=\"\",L2667=\"\"),\"\",M2667-L2667)",
+      "cached_value": -1.58400551699188,
+      "valid": true
+    },
+    {
+      "cell": "AD2667",
+      "formula": "=IF(OR(N2667=\"\",L2667=\"\"),\"\",N2667-L2667)",
+      "cached_value": -1.45843544857209,
+      "valid": true
+    },
+    {
+      "cell": "AE2667",
+      "formula": "=IF(OR(Y2667=\"\",X2667=\"\"),\"\",Y2667-X2667)",
+      "cached_value": 2.56019369332559,
+      "valid": true
+    },
+    {
+      "cell": "AF2667",
+      "formula": "=IF(OR(Z2667=\"\",X2667=\"\"),\"\",Z2667-X2667)",
+      "cached_value": 2.16921392056375,
+      "valid": true
+    },
+    {
+      "cell": "AG2667",
+      "formula": "=IF(AA2667=\"\",\"\",ABS(AA2667))",
+      "cached_value": 0.32897225084967,
+      "valid": true
+    },
+    {
+      "cell": "AH2667",
+      "formula": "=IF(AB2667=\"\",\"\",ABS(AB2667))",
+      "cached_value": 0.454542319269461,
+      "valid": true
+    },
+    {
+      "cell": "AI2667",
+      "formula": "=IF(AC2667=\"\",\"\",ABS(AC2667))",
+      "cached_value": 1.58400551699188,
+      "valid": true
+    },
+    {
+      "cell": "AJ2667",
+      "formula": "=IF(AD2667=\"\",\"\",ABS(AD2667))",
+      "cached_value": 1.45843544857209,
+      "valid": true
+    },
+    {
+      "cell": "AK2667",
+      "formula": "=IF(AE2667=\"\",\"\",ABS(AE2667))",
+      "cached_value": 2.56019369332559,
+      "valid": true
+    },
+    {
+      "cell": "AL2667",
+      "formula": "=IF(AF2667=\"\",\"\",ABS(AF2667))",
+      "cached_value": 2.16921392056375,
+      "valid": true
+    }
+  ],
+  "framewise_rows": 2667,
+  "included_frames": 2666,
+  "summary_units": [
+    [
+      "ANG",
+      "deg"
+    ],
+    [
+      "FL",
+      "mm"
+    ],
+    [
+      "PEN",
+      "deg"
+    ]
+  ],
+  "numeric_type_failures": [],
+  "failures": [],
+  "passed": true
+}

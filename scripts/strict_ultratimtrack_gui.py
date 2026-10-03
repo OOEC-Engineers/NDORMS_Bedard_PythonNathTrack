@@ -58,6 +58,7 @@ from ultrasound_tracker.speckle_confidence import SpeckleConfidenceConfig, _gray
 from scripts.run_strict_ultratimtrack_video import (
     DEFAULT_UTT_EXPORT,
     VIDEO_EXTENSIONS,
+    build_arg_parser as build_runner_arg_parser,
     process_video,
     read_first_frame,
     read_gray_frames,
@@ -95,6 +96,17 @@ def _as_int(text: str, default: int | None = None) -> int | None:
     if value == "":
         return default
     return int(value)
+
+
+def _runner_namespace(**overrides: Any) -> argparse.Namespace:
+    """Return complete runner arguments with selected GUI values applied."""
+
+    values = vars(build_runner_arg_parser().parse_args([]))
+    unknown = sorted(set(overrides).difference(values))
+    if unknown:
+        raise TypeError(f"Unknown strict runner argument(s): {', '.join(unknown)}")
+    values.update(overrides)
+    return argparse.Namespace(**values)
 
 
 def _csv_float(value: str | None) -> float:
@@ -1734,7 +1746,7 @@ class StrictUltraTimTrackGUI:
         self.active_total_frames = int(progress_total)
         progress_every = max(1, int(progress_total // 20)) if progress_total else 250
 
-        return argparse.Namespace(
+        return _runner_namespace(
             video=self.video_path,
             interactive=False,
             name=self.video_path.stem,

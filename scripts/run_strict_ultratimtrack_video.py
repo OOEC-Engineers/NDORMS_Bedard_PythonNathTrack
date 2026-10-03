@@ -1391,7 +1391,7 @@ def save_confidence_plot(path: Path, arrays: Mapping[str, np.ndarray]) -> None:
     plt.close(fig)
 
 
-def parse_args() -> argparse.Namespace:
+def build_arg_parser() -> argparse.ArgumentParser:
     default_export = DEFAULT_UTT_EXPORT if DEFAULT_UTT_EXPORT.exists() else LEGACY_UTT_EXPORT
     parser = argparse.ArgumentParser(description="Run strict Python UltraTimTrack and write an annotated video.")
     parser.add_argument("video", nargs="?", type=Path, default=None, help="Video path. Omit with --interactive.")
@@ -1426,6 +1426,17 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--limit", type=int, default=None, help="Process only the first N frames.")
     parser.add_argument("--seed-frames", type=int, default=11, help="Frames used for autonomous seed selection.")
+    parser.add_argument(
+        "--seed-angle-range",
+        type=float,
+        nargs=2,
+        metavar=("MIN_DEG", "MAX_DEG"),
+        default=None,
+        help=(
+            "Optional seed-only fascicle angle range. This constrains autonomous initialization "
+            "without changing the per-frame fascicle Hough angle range."
+        ),
+    )
     parser.add_argument("--fas-angle-min", type=float, default=None, help="Override minimum fascicle Hough/seed angle.")
     parser.add_argument("--fas-angle-max", type=float, default=None, help="Override maximum fascicle Hough/seed angle.")
     parser.add_argument(
@@ -1536,7 +1547,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mm-per-pixel", type=float, default=None, help="Override pixel scale.")
     parser.add_argument("--image-depth-mm", type=float, default=None, help="Image depth; used if --mm-per-pixel is absent.")
     parser.add_argument("--progress-every", type=int, default=250)
-    args = parser.parse_args()
+    return parser
+
+
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
+    parser = build_arg_parser()
+    args = parser.parse_args(argv)
     kalman_mode_from_cli = args.kalman_mode is not None or bool(args.adaptive_r)
     annotate_comparison_from_cli = bool(args.annotate_kalman_comparison)
     compare_from_cli = bool(args.compare_to_fixed_kalman or annotate_comparison_from_cli)
@@ -1544,6 +1560,8 @@ def parse_args() -> argparse.Namespace:
         parser.error("--fas-angle-min must be smaller than --fas-angle-max.")
     if args.seed_frames <= 0:
         parser.error("--seed-frames must be positive.")
+    if args.seed_angle_range is not None and args.seed_angle_range[0] >= args.seed_angle_range[1]:
+        parser.error("--seed-angle-range MIN_DEG must be smaller than MAX_DEG.")
     if args.max_angle_step <= 0:
         parser.error("--max-angle-step must be positive.")
     if args.hough_fallback_min_mass_below_10deg < 0:
@@ -1711,6 +1729,25 @@ def process_video(args: argparse.Namespace) -> dict[str, Path | None]:
             print("Fascicle angle auto-selection found no stable seed cluster; keeping exported range.")
 
     fas_angle_min, fas_angle_max = current_fascicle_angle_range(parms)
+    if args.seed_angle_range is None:
+        seed_angle_min, seed_angle_max = fas_angle_min, fas_angle_max
+    else:
+        seed_angle_min, seed_angle_max = map(float, args.seed_angle_range)
+        if seed_angle_min < fas_angle_min or seed_angle_max > fas_angle_max:
+            raise ValueError(
+                "--seed-angle-range must lie within the active per-frame fascicle angle range "
+                f"[{fas_angle_min:g}, {fas_angle_max:g}] deg."
+            )
+        # Preflight candidates, when present, were generated for the orientation range.
+        # Regenerate only the initialization candidates for the explicit seed-only range.
+        seed_config = None
+        candidates = None
+        clusters = None
+        print(
+            "Using seed-only fascicle angle range: "
+            f"{seed_angle_min:.3f} to {seed_angle_max:.3f} deg "
+            f"(per-frame Hough remains {fas_angle_min:.3f} to {fas_angle_max:.3f} deg)"
+        )
 
     block_size = np.asarray(mat_root.get("BlockSize", [81, 81]), dtype=int).reshape(-1)
     win_size = (int(block_size[-1]), int(block_size[0])) if block_size.size >= 2 else (81, 81)
@@ -1768,8 +1805,8 @@ def process_video(args: argparse.Namespace) -> dict[str, Path | None]:
         )
         seed_config = replace(
             FascicleSeedScoringConfig(min_cluster_frame_coverage=min(8, seed_frame_count)),
-            angle_min_deg=fas_angle_min,
-            angle_max_deg=fas_angle_max,
+            angle_min_deg=seed_angle_min,
+            angle_max_deg=seed_angle_max,
         )
         candidates = extract_fascicle_seed_candidates(
             seed_entries,
@@ -2146,6 +2183,7 @@ def process_video(args: argparse.Namespace) -> dict[str, Path | None]:
         ),
         "seed_angle_min_deg": float(seed_config.angle_min_deg),
         "seed_angle_max_deg": float(seed_config.angle_max_deg),
+        "seed_angle_range_manual_override": args.seed_angle_range is not None,
         "seed_frames_requested": int(args.seed_frames),
         "seed_frames_used": int(seed_frame_count),
         "seed_selection_scale_source": "pixel_image_evidence",

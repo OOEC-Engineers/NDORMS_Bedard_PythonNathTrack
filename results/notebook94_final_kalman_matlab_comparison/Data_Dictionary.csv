@@ -1,0 +1,106 @@
+column,unit,source,definition_and_interpretation
+frame_index_video,index,Video/OpenCV,Zero-based physical video frame index.
+frame_index_matlab,index,MATLAB TrackingData,One-based MATLAB physical frame number; blank where MATLAB has no sample.
+matlab_sample_index_zero_based,,Deterministic publication analysis,matlab sample index zero based
+frame_index_python,index,Python NPZ,Zero-based Python physical frame index.
+time_seconds,s,video frame index / fps,Physical time with frame 0 at 0 s.
+MATLAB_time_seconds_stored,s,MATLAB Region.Time,Saved MATLAB time; starts at 1/fps because MATLAB labels frames one-based.
+included_in_analysis,boolean,analysis,"True only when all nine required MATLAB/fixed/adaptive ANG, PEN, and FL values are finite."
+exclusion_reason,,Deterministic publication analysis,exclusion reason
+MATLAB_ANG_deg,deg,MATLAB .mat result,MATLAB ANG deg
+Python_fixed_ANG_deg,deg,Fresh Python strict-results NPZ,Python fixed ANG deg
+Python_adaptive_ANG_deg,deg,Fresh Python strict-results NPZ,Python adaptive ANG deg
+MATLAB_PEN_deg,deg,MATLAB .mat result,MATLAB PEN deg
+Python_fixed_PEN_deg,deg,Fresh Python strict-results NPZ,Python fixed PEN deg
+Python_adaptive_PEN_deg,deg,Fresh Python strict-results NPZ,Python adaptive PEN deg
+MATLAB_FL_original_unit,,MATLAB .mat result,MATLAB FL original unit
+MATLAB_FL_original_unit_name,,MATLAB .mat result,MATLAB FL original unit name
+Python_fixed_FL_original_unit,,Fresh Python strict-results NPZ,Python fixed FL original unit
+Python_fixed_FL_original_unit_name,,Fresh Python strict-results NPZ,Python fixed FL original unit name
+Python_adaptive_FL_original_unit,,Fresh Python strict-results NPZ,Python adaptive FL original unit
+Python_adaptive_FL_original_unit_name,,Fresh Python strict-results NPZ,Python adaptive FL original unit name
+MATLAB_FL_px_derived,,MATLAB .mat result,MATLAB FL px derived
+Python_fixed_FL_px,px,Fresh Python strict-results NPZ,Python fixed FL px
+Python_adaptive_FL_px,px,Fresh Python strict-results NPZ,Python adaptive FL px
+MATLAB_FL_mm,mm,MATLAB .mat result,MATLAB FL mm
+Python_fixed_FL_mm,mm,Fresh Python strict-results NPZ,Python fixed FL mm
+Python_adaptive_FL_mm,mm,Fresh Python strict-results NPZ,Python adaptive FL mm
+fixed_minus_matlab_ANG_deg,deg,Excel formula and independent Python calculation,Signed frame-level difference: Python fixed-R minus MATLAB; positive means Python is larger.
+adaptive_minus_matlab_ANG_deg,deg,Excel formula and independent Python calculation,Signed frame-level difference: Python adaptive anisotropic-R minus MATLAB; positive means Python is larger.
+fixed_minus_matlab_PEN_deg,deg,Excel formula and independent Python calculation,Signed frame-level difference: Python fixed-R minus MATLAB; positive means Python is larger.
+adaptive_minus_matlab_PEN_deg,deg,Excel formula and independent Python calculation,Signed frame-level difference: Python adaptive anisotropic-R minus MATLAB; positive means Python is larger.
+fixed_minus_matlab_FL_mm,mm,Excel formula and independent Python calculation,Signed frame-level difference: Python fixed-R minus MATLAB; positive means Python is larger.
+adaptive_minus_matlab_FL_mm,mm,Excel formula and independent Python calculation,Signed frame-level difference: Python adaptive anisotropic-R minus MATLAB; positive means Python is larger.
+absolute_error_fixed_ANG_deg,deg,Excel formula and independent Python calculation,Absolute value of the fixed-R signed difference from MATLAB.
+absolute_error_adaptive_ANG_deg,deg,Excel formula and independent Python calculation,Absolute value of the adaptive anisotropic-R signed difference from MATLAB.
+absolute_error_fixed_PEN_deg,deg,Excel formula and independent Python calculation,Absolute value of the fixed-R signed difference from MATLAB.
+absolute_error_adaptive_PEN_deg,deg,Excel formula and independent Python calculation,Absolute value of the adaptive anisotropic-R signed difference from MATLAB.
+absolute_error_fixed_FL_mm,mm,Excel formula and independent Python calculation,Absolute value of the fixed-R signed difference from MATLAB.
+absolute_error_adaptive_FL_mm,mm,Excel formula and independent Python calculation,Absolute value of the adaptive anisotropic-R signed difference from MATLAB.
+adaptive_confidence_score,0–1,Python confidence diagnostics,Combined confidence used for scalar summary; anisotropic branches use component confidences.
+adaptive_confidence_angle,,Fresh Python strict-results NPZ,adaptive confidence angle
+adaptive_confidence_length,,Fresh Python strict-results NPZ,adaptive confidence length
+adaptive_R_scale_global,,Fresh Python strict-results NPZ,Dimensionless multiplier applied to the relevant base measurement covariance; fixed-R equals 1.
+adaptive_R_scale_angle,,Fresh Python strict-results NPZ,Dimensionless multiplier applied to the relevant base measurement covariance; fixed-R equals 1.
+adaptive_R_scale_length,,Fresh Python strict-results NPZ,Dimensionless multiplier applied to the relevant base measurement covariance; fixed-R equals 1.
+adaptive_angle_measurement_covariance_deg2,deg²,"Python Kalman measurement_R_diag[:,1]",Actual per-frame angle measurement covariance.
+adaptive_length_side_measurement_covariance_px2,px²,"Python Kalman measurement_R_diag[:,0]","Covariance for superficial-attachment x state; it is the implemented length-side measurement term, not variance of final FL in mm."
+fixed_R_scale_angle,,Fresh Python strict-results NPZ,Dimensionless multiplier applied to the relevant base measurement covariance; fixed-R equals 1.
+fixed_R_scale_length,,Fresh Python strict-results NPZ,Dimensionless multiplier applied to the relevant base measurement covariance; fixed-R equals 1.
+fixed_angle_measurement_covariance_deg2,deg²,Fresh Python strict-results NPZ,fixed angle measurement covariance deg2
+fixed_length_side_measurement_covariance_px2,px²,Fresh Python strict-results NPZ,fixed length side measurement covariance px2
+adaptive_kalman_gain_length_side,,Fresh Python strict-results NPZ,Forward-filter Kalman gain for the named two-state component.
+adaptive_kalman_gain_angle,,Fresh Python strict-results NPZ,Forward-filter Kalman gain for the named two-state component.
+fixed_kalman_gain_length_side,,Fresh Python strict-results NPZ,Forward-filter Kalman gain for the named two-state component.
+fixed_kalman_gain_angle,,Fresh Python strict-results NPZ,Forward-filter Kalman gain for the named two-state component.
+adaptive_smoother_gain_length_side,,Fresh Python strict-results NPZ,Backward RTS-style smoother gain for the named two-state component.
+adaptive_smoother_gain_angle,,Fresh Python strict-results NPZ,Backward RTS-style smoother gain for the named two-state component.
+fixed_smoother_gain_length_side,,Fresh Python strict-results NPZ,Backward RTS-style smoother gain for the named two-state component.
+fixed_smoother_gain_angle,,Fresh Python strict-results NPZ,Backward RTS-style smoother gain for the named two-state component.
+detection_success,,Deterministic publication analysis,Boolean per-frame diagnostic flag; interpretation is given by the column name and README cautions.
+missing_detection_flag,,Deterministic publication analysis,Boolean per-frame diagnostic flag; interpretation is given by the column name and README cautions.
+hough_localmax_fallback_flag,,Deterministic publication analysis,Boolean per-frame diagnostic flag; interpretation is given by the column name and README cautions.
+hough_peak_source,,Deterministic publication analysis,hough peak source
+raw_timtrack_alpha_deg,deg,Deterministic publication analysis,raw timtrack alpha deg
+selected_timtrack_alpha_deg,deg,Deterministic publication analysis,selected timtrack alpha deg
+hough_baseline_alpha_deg,deg,Deterministic publication analysis,hough baseline alpha deg
+hough_fallback_mass_below_10deg,,Deterministic publication analysis,hough fallback mass below 10deg
+hough_fallback_gap_to_lower_deg,deg,Deterministic publication analysis,hough fallback gap to lower deg
+fascicle_candidate_raw_rejected,,Deterministic publication analysis,fascicle candidate raw rejected
+fascicle_candidate_selection_reason,,Deterministic publication analysis,fascicle candidate selection reason
+klt_affine_ok,,Deterministic publication analysis,Boolean per-frame diagnostic flag; interpretation is given by the column name and README cautions.
+klt_tracker_redetected,,Deterministic publication analysis,Boolean per-frame diagnostic flag; interpretation is given by the column name and README cautions.
+klt_tracker_found_fraction,,Deterministic publication analysis,klt tracker found fraction
+klt_points_count,,Deterministic publication analysis,klt points count
+klt_tracked_count,,Deterministic publication analysis,klt tracked count
+klt_inlier_count,,Deterministic publication analysis,klt inlier count
+superficial_aponeurosis_rejected,,Deterministic publication analysis,"One-based image-coordinate aponeurosis endpoint or its per-frame rejection flag, as named."
+deep_aponeurosis_rejected,,Deterministic publication analysis,"One-based image-coordinate aponeurosis endpoint or its per-frame rejection flag, as named."
+MATLAB_superficial_x_left_1b,,MATLAB .mat result,MATLAB superficial x left 1b
+MATLAB_superficial_y_left_1b,,MATLAB .mat result,MATLAB superficial y left 1b
+MATLAB_superficial_x_right_1b,,MATLAB .mat result,MATLAB superficial x right 1b
+MATLAB_superficial_y_right_1b,,MATLAB .mat result,MATLAB superficial y right 1b
+MATLAB_deep_x_left_1b,,MATLAB .mat result,MATLAB deep x left 1b
+MATLAB_deep_y_left_1b,,MATLAB .mat result,MATLAB deep y left 1b
+MATLAB_deep_x_right_1b,,MATLAB .mat result,MATLAB deep x right 1b
+MATLAB_deep_y_right_1b,,MATLAB .mat result,MATLAB deep y right 1b
+Python_superficial_x_left_1b,,Fresh Python strict-results NPZ,Python superficial x left 1b
+Python_superficial_y_left_1b,,Fresh Python strict-results NPZ,Python superficial y left 1b
+Python_superficial_x_right_1b,,Fresh Python strict-results NPZ,Python superficial x right 1b
+Python_superficial_y_right_1b,,Fresh Python strict-results NPZ,Python superficial y right 1b
+Python_deep_x_left_1b,,Fresh Python strict-results NPZ,Python deep x left 1b
+Python_deep_y_left_1b,,Fresh Python strict-results NPZ,Python deep y left 1b
+Python_deep_x_right_1b,,Fresh Python strict-results NPZ,Python deep x right 1b
+Python_deep_y_right_1b,,Fresh Python strict-results NPZ,Python deep y right 1b
+MATLAB_fascicle_superficial_x_1b,,MATLAB .mat result,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+MATLAB_fascicle_superficial_y_1b,,MATLAB .mat result,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+MATLAB_fascicle_deep_x_1b,,MATLAB .mat result,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+MATLAB_fascicle_deep_y_1b,,MATLAB .mat result,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_adaptive_fascicle_superficial_x_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_adaptive_fascicle_superficial_y_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_adaptive_fascicle_deep_x_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_adaptive_fascicle_deep_y_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_fixed_fascicle_superficial_x_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_fixed_fascicle_superficial_y_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_fixed_fascicle_deep_x_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."
+Python_fixed_fascicle_deep_y_1b,,Fresh Python strict-results NPZ,"One-based image-coordinate endpoint of the final fascicle segment, labelled by superficial/deep intersection."

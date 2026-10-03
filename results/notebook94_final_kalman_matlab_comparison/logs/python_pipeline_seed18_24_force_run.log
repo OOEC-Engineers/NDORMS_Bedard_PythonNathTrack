@@ -1,0 +1,90 @@
+Running strict pipeline:
+Measurement scale source: validated_utt_export_and_matlab_result_image_depth
+/Users/grosbedou/PycharmProjects/NDORMS/.venv/bin/python /Users/grosbedou/PycharmProjects/NDORMS/scripts/run_strict_ultratimtrack_video.py /Users/grosbedou/PycharmProjects/NDORMS/data/raw/UltraTimTrack_test.mp4 --name UltraTimTrack_test --roi-path /Users/grosbedou/PycharmProjects/NDORMS/data/rois/UltraTimTrack_test_rois.json --utt-export /Users/grosbedou/Documents/GitHub/UltraTimTrack/UTT_numeric_export.mat --results-dir /Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/python_localmax_adaptive --kalman-mode adaptive-anisotropic --compare-to-fixed-kalman --hough-localmax-fallback --hough-fallback-min-mass-below-10deg 0.25 --hough-fallback-min-gap-to-lower-deg 4.0 --fas-angle-min 5.0 --fas-angle-max 60.0 --seed-angle-range 18.0 24.0 --no-annotated-video --save-overlays 0 --no-time-series-plot --progress-every 250 --image-depth-mm 50.7
+Loading ROIs: /Users/grosbedou/PycharmProjects/NDORMS/data/rois/UltraTimTrack_test_rois.json
+
+Pixel scale: measurements=0.090213523 mm/px (entered_image_depth_mm); fascicle seed selection uses pixel/image evidence only
+Using 11 seed frame(s) for autonomous fascicle choice (requested 11).
+Using seed-only fascicle angle range: 18.000 to 24.000 deg (per-frame Hough remains 5.000 to 60.000 deg)
+
+Running TimTrack image stream...
+Using fascicle angle range: 5.000 to 60.000 deg
+Using conditional Hough localmax fallback: mass_below_10deg >= 0.25, gap_to_lower_deg >= 4
+TimTrack image geofeatures processed 250
+TimTrack image geofeatures processed 500
+TimTrack image geofeatures processed 750
+TimTrack image geofeatures processed 1000
+TimTrack image geofeatures processed 1250
+TimTrack image geofeatures processed 1500
+TimTrack image geofeatures processed 1750
+TimTrack image geofeatures processed 2000
+TimTrack image geofeatures processed 2250
+TimTrack image geofeatures processed 2500
+
+Selecting autonomous fascicle seed...
+Selected seed alpha: 18.800 deg (a18.75_x350_lp850)
+
+Estimating fascicle KLT affines with persistent tracker state...
+persistent KLT processed 251/2667
+persistent KLT processed 501/2667
+persistent KLT processed 751/2667
+persistent KLT processed 1001/2667
+persistent KLT processed 1251/2667
+persistent KLT processed 1501/2667
+persistent KLT processed 1751/2667
+persistent KLT processed 2001/2667
+persistent KLT processed 2251/2667
+persistent KLT processed 2501/2667
+persistent KLT processed 2667/2667
+
+Running aponeurosis state estimator...
+aponeurosis state processed 251/2667
+aponeurosis state processed 501/2667
+aponeurosis state processed 751/2667
+aponeurosis state processed 1001/2667
+aponeurosis state processed 1251/2667
+aponeurosis state processed 1501/2667
+aponeurosis state processed 1751/2667
+aponeurosis state processed 2001/2667
+aponeurosis state processed 2251/2667
+aponeurosis state processed 2501/2667
+aponeurosis state processed 2667/2667
+Conditional Hough localmax fallback patched 175/2667 frames
+
+Computing ultrasound confidence metrics...
+
+Running 2-state fascicle Kalman (adaptive-anisotropic)...
+Running normal fixed-R Kalman for comparison...
+
+Done.
+CSV: /Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/python_localmax_adaptive/UltraTimTrack_test/UltraTimTrack_test_strict_FL_PEN_ANG.csv
+NPZ: /Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/python_localmax_adaptive/UltraTimTrack_test/UltraTimTrack_test_strict_results.npz
+Metadata: /Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/python_localmax_adaptive/UltraTimTrack_test/UltraTimTrack_test_strict_metadata.json
+Kalman comparison: /Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/python_localmax_adaptive/UltraTimTrack_test/UltraTimTrack_test_kalman_comparison_vs_fixed.csv
+# Notebook 94 - final MATLAB vs Python Kalman comparison
+
+This run compares MATLAB final outputs against Python normal fixed-R Kalman and Python adaptive anisotropic Kalman.
+
+## Configuration
+
+- Video: `/Users/grosbedou/PycharmProjects/NDORMS/data/raw/UltraTimTrack_test.mp4`
+- MATLAB result: `/Users/grosbedou/PycharmProjects/NDORMS/data/matlab/slow_low_01_DOWN_tracked_Q=001.mat`
+- Strict result NPZ: `/Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/python_localmax_adaptive/UltraTimTrack_test/UltraTimTrack_test_strict_results.npz`
+- Hough localmax fallback: enabled, mass_below_10deg >= 0.25, gap_to_lower_deg >= 4.0
+- Fascicle angle range: 5 to 60 deg
+- Compared frames: 2666 with Python offset 0
+- Alignment basis: explicit physical-frame alignment; MATLAB timestamps are one-based
+- Localmax fallback frames in raw run: 175
+
+## Key metrics
+
+- Best ANG_deg: `Python normal Kalman` RMSE 0.8218 deg
+- Best PEN_deg: `Python adaptive Kalman` RMSE 0.8418 deg
+- Best FL_mm: `Python adaptive Kalman` RMSE 1.4216 mm
+
+## Outputs
+
+- Metrics CSV: `/Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/kalman_matlab_metrics.csv`
+- Per-frame CSV: `/Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/kalman_matlab_per_frame.csv`
+- Over-time plot: `/Users/grosbedou/PycharmProjects/NDORMS/results/notebook94_final_kalman_matlab_comparison/kalman_matlab_over_time.png`
+

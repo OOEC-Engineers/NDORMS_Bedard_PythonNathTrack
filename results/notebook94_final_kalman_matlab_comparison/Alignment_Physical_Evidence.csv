@@ -1,0 +1,15 @@
+evidence_signal,unit,python_offset_frames,selected_final_alignment,n,mae,rmse,pearson_r
+whole-frame brightness,8-bit intensity; systematic conversion offset present,-3,False,2663,1.7488111334095136,1.812657982468542,0.9956747302643094
+whole-frame brightness,8-bit intensity; systematic conversion offset present,-2,False,2664,1.7494379889703906,1.777837661578434,0.9981280472663512
+whole-frame brightness,8-bit intensity; systematic conversion offset present,-1,False,2665,1.7501631950326944,1.7656667268669326,0.9990098531728951
+whole-frame brightness,8-bit intensity; systematic conversion offset present,0,True,2666,1.7507857880462172,1.751897635712115,0.9999863808348306
+whole-frame brightness,8-bit intensity; systematic conversion offset present,1,False,2666,1.7514341901939348,1.7677636505482797,0.9989561640687324
+whole-frame brightness,8-bit intensity; systematic conversion offset present,2,False,2665,1.752051018889417,1.7820354538985315,0.998023279050116
+whole-frame brightness,8-bit intensity; systematic conversion offset present,3,False,2664,1.752897273640925,1.8187873258538738,0.9955178611274176
+raw Hough fascicle alpha,deg,-3,False,2663,1.9635749155088247,3.380851070617772,0.8025982946989256
+raw Hough fascicle alpha,deg,-2,False,2664,1.932057057057057,3.3632385990104647,0.80483568571734
+raw Hough fascicle alpha,deg,-1,False,2665,1.8013133208255159,3.2133194890699515,0.8229740791247515
+raw Hough fascicle alpha,deg,0,True,2666,1.5943360840210052,2.9100512623641865,0.8571079968940147
+raw Hough fascicle alpha,deg,1,False,2666,1.7837584396099024,3.2113446457221624,0.8232599864011116
+raw Hough fascicle alpha,deg,2,False,2665,1.8893058161350844,3.3322856389777478,0.8087395893616902
+raw Hough fascicle alpha,deg,3,False,2664,1.9540165165165164,3.4028643428346856,0.7999907560579229
